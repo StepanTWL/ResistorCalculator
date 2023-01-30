@@ -106,6 +106,12 @@
 	border-radius: 8px; 
 }</string>
       </property>
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
      </widget>
     </item>
    </layout>
@@ -227,7 +233,7 @@
     </font>
    </property>
    <property name="text">
-    <string>10000R</string>
+    <string/>
    </property>
   </widget>
  </widget>
