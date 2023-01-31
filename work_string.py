@@ -34,13 +34,15 @@ def clear_string(s: str) -> str:
     for i in s.lower():
         if i == '-':
             s1 += '|'
+        elif i == ',':
+            s1 += '.'
         elif i in '0123456789+|)(.*':
             s1 += i
-        if i == 'k':
+        if i == 'k' or i == 'к':
             s1 += '*1000'
-        elif i == 'm':
+        elif i == 'm' or i == 'м':
             s1 += '*1000000'
-        elif i == 'g':
+        elif i == 'g' or i == 'г':
             s1 += '*1000000000'
     s1 = s1.lstrip('*').replace('**', '*')
     s = copy(s1)
@@ -74,3 +76,4 @@ def parse_string(s: str):
     s = clear_string(s)
     s = brackets_string(s)
     s = math_string(s)
+    return s

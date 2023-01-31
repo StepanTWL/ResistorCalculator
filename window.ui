@@ -174,24 +174,24 @@
     </item>
    </layout>
   </widget>
-  <widget class="QLabel" name="TitleResult">
+  <widget class="QLabel" name="Result">
    <property name="geometry">
     <rect>
      <x>70</x>
      <y>100</y>
-     <width>60</width>
+     <width>260</width>
      <height>20</height>
     </rect>
    </property>
    <property name="minimumSize">
     <size>
-     <width>60</width>
+     <width>260</width>
      <height>20</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
-     <width>60</width>
+     <width>260</width>
      <height>20</height>
     </size>
    </property>
@@ -202,38 +202,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Result </string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="Result">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>100</y>
-     <width>160</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>160</width>
-     <height>20</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>160</width>
-     <height>20</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>Arial</family>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string/>
+    <string>Result    0.0R</string>
    </property>
   </widget>
  </widget>
