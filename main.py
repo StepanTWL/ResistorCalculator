@@ -9,7 +9,8 @@ def on_click():
         return
     s = parse_string(s)
     s = float(format(float(s), ".6f"))
-    s = '{0:,}'.format(s).replace(',', '.', str(s).count(','))
+    s = '{0:,}'.format(s).replace(',', '.')
+    s = s[:s.rfind('.')] + ',' + s[s.rfind('.')+1:]
     form.Result.setText(f'Result   {s}R')
 
 
