@@ -29,7 +29,7 @@
    <string>Resistor Calculator</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QMainWindow{background-color: rgb(200,200,200);}</string>
+   <string notr="true">#QMainWindow{background-color: rgb(200,200,200);}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="horizontalLayoutWidget">
@@ -227,7 +227,7 @@
     </property>
     <addaction name="actionNew"/>
     <addaction name="actionSave"/>
-    <addaction name="actionLoad"/>
+    <addaction name="actionOpen"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
@@ -255,7 +255,7 @@
     <string>Ctrl+S</string>
    </property>
   </action>
-  <action name="actionLoad">
+  <action name="actionOpen">
    <property name="text">
     <string>Open</string>
    </property>

@@ -1,7 +1,8 @@
 import sys
+from tkinter import filedialog
 
 from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from work_string import parse_string
 
 
@@ -12,11 +13,12 @@ def on_click_calculator():
     s = parse_string(s)
     s = float(format(float(s), ".6f"))
     s = '{0:,}'.format(s).replace(',', '.')
-    s = s[:s.rfind('.')] + ',' + s[s.rfind('.')+1:]
+    s = s[:s.rfind('.')] + ',' + s[s.rfind('.') + 1:]
     form.Result.setText(f'Result   {s}R')
 
+
 def on_click_info():
-    global windowAbout
+    global windowAbout, window
     FormAbout, WindowAbout = uic.loadUiType("about.ui")
     windowAbout = WindowAbout()
     formAbout = FormAbout()
@@ -26,9 +28,24 @@ def on_click_info():
     x = window.x() + 300
     y = window.y() + 100
     windowAbout.setGeometry(x, y, 200, 120)
-    windowAbout.setWindowTitle('Help')
     windowAbout.show()
-    formAbout.ButtonOk.triggered.connect(sys.exit)
+    formAbout.ButtonOk.clicked.connect(windowAbout.close)
+
+
+def on_click_new():
+    form.ResistFormula.setText('')
+
+
+def on_click_save():
+    pass
+
+
+def on_click_open():
+    file, check = QFileDialog.getOpenFileName(None, 'Open file', 'c:\\', "Text Files (*.txt);;All Files (*)")
+
+    if check:
+        with open(file, "r") as file:
+            form.ResistFormula.setText(file)
 
 
 Form, Window = uic.loadUiType("window.ui")
@@ -40,15 +57,13 @@ form.setupUi(window)
 window.show()
 
 form.ButtonCalculate.clicked.connect(on_click_calculator)
-#form.actionNew.triggered.connect()
-#form.actionSave.triggered.connect()
-#form.actionOpen.triggered.connect()
+form.actionNew.triggered.connect(on_click_new)
+# form.actionSave.triggered.connect()
+form.actionOpen.triggered.connect(on_click_open)
 form.actionInfo.triggered.connect(on_click_info)
 form.actionExit.triggered.connect(sys.exit)
 
 app.exec_()
-
-
 
 '''
     @pyqtSlot()
