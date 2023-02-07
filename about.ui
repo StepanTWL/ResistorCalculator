@@ -68,7 +68,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Copyright © 2022-2023 by Stepan Toshel.</string>
+    <string>Copyright © 2022-2022 by Stepan Toshel.</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">

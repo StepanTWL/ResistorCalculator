@@ -1,7 +1,11 @@
 import sys
+from datetime import datetime
+
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from work_string import parse_string
+
+version = '0.1'
 
 
 def on_click_calculator():
@@ -16,7 +20,7 @@ def on_click_calculator():
 
 
 def on_click_info():
-    global windowAbout, window
+    global windowAbout, window, formAbout
     FormAbout, WindowAbout = uic.loadUiType("about.ui")
     windowAbout = WindowAbout()
     formAbout = FormAbout()
@@ -27,6 +31,12 @@ def on_click_info():
     y = window.y() + 100
     windowAbout.setGeometry(x, y, 200, 120)
     windowAbout.show()
+    a = datetime.today().year
+    s = formAbout.label_2.text()
+    formAbout.label_2.setText(s[:17] + str(a) + s[21:])
+    a = datetime.today().strftime("%d.%m.%Y")
+    s = formAbout.label.text()
+    formAbout.label.setText(f"About Resistor Calculator {version} ({a})")
     formAbout.ButtonOk.clicked.connect(windowAbout.close)
 
 
