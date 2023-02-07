@@ -1,6 +1,4 @@
 import sys
-from tkinter import filedialog
-
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from work_string import parse_string
@@ -14,7 +12,7 @@ def on_click_calculator():
     s = float(format(float(s), ".6f"))
     s = '{0:,}'.format(s).replace(',', '.')
     s = s[:s.rfind('.')] + ',' + s[s.rfind('.') + 1:]
-    form.Result.setText(f'Result   {s}R')
+    form.Result.setText(f'Result    {s}R')
 
 
 def on_click_info():
@@ -34,10 +32,18 @@ def on_click_info():
 
 def on_click_new():
     form.ResistFormula.setText('')
+    form.Result.setText(f'Result    0,0R')
 
 
 def on_click_save():
-    pass
+    file, check = QFileDialog.getSaveFileName(None, 'Save file', 'c:\\', "Text Files (*.txt);;All Files (*)")
+
+    if check:
+        with open(file, "w") as file:
+            formula = form.ResistFormula.text()
+            file.write(f"Formula   {formula}\n")
+            result = form.Result.text()
+            file.write(result)
 
 
 def on_click_open():
@@ -45,7 +51,10 @@ def on_click_open():
 
     if check:
         with open(file, "r") as file:
-            form.ResistFormula.setText(file)
+            formula = file.readline()
+            form.ResistFormula.setText(formula[10:-1])
+            result = file.readline()
+            form.Result.setText(result)
 
 
 Form, Window = uic.loadUiType("window.ui")
@@ -58,7 +67,7 @@ window.show()
 
 form.ButtonCalculate.clicked.connect(on_click_calculator)
 form.actionNew.triggered.connect(on_click_new)
-# form.actionSave.triggered.connect()
+form.actionSave.triggered.connect(on_click_save)
 form.actionOpen.triggered.connect(on_click_open)
 form.actionInfo.triggered.connect(on_click_info)
 form.actionExit.triggered.connect(sys.exit)

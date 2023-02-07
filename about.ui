@@ -68,7 +68,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Copyright © 2022-2023 by Stepan Toshel</string>
+    <string>Copyright © 2022-2023 by Stepan Toshel.</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
@@ -81,7 +81,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Program for calculating the resistance of electrical circuits</string>
+    <string>Program for calculating the resistance of electrical circuits.</string>
    </property>
   </widget>
  </widget>
