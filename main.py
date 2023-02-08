@@ -1,8 +1,7 @@
 import sys
 from datetime import datetime
-
 from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
+from PyQt5.QtWidgets import QApplication, QFileDialog
 from work_string import parse_string
 
 version = '0.1'

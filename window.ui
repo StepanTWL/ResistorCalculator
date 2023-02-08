@@ -28,8 +28,17 @@
   <property name="windowTitle">
    <string>Resistor Calculator</string>
   </property>
+  <property name="windowIcon">
+   <iconset theme="d:\MyProject\Python\ResistorCalculator\images\icon.png"/>
+  </property>
   <property name="styleSheet">
    <string notr="true">#QMainWindow{background-color: rgb(200,200,200);}</string>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>64</width>
+    <height>64</height>
+   </size>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="horizontalLayoutWidget">
@@ -71,10 +80,10 @@
        </property>
        <property name="font">
         <font>
-         <family>Arial</family>
+         <family>Rubik SemiBold</family>
          <pointsize>14</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
+         <weight>50</weight>
+         <bold>false</bold>
         </font>
        </property>
        <property name="styleSheet">
@@ -136,7 +145,7 @@ QPushButton:pressed {
     </property>
     <property name="font">
      <font>
-      <family>Arial</family>
+      <family>Rubik</family>
       <pointsize>16</pointsize>
       <weight>50</weight>
       <italic>false</italic>
@@ -160,6 +169,12 @@ QPushButton:pressed {
       <height>16</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Rubik</family>
+      <kerning>true</kerning>
+     </font>
+    </property>
     <property name="text">
      <string>Example: 10k | (10k + 10M)</string>
     </property>
@@ -182,7 +197,7 @@ QPushButton:pressed {
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>24</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -204,6 +219,9 @@ QPushButton:pressed {
    <addaction name="menuHelp"/>
   </widget>
   <action name="actionNew">
+   <property name="icon">
+    <iconset theme="d:\MyProject\Python\ResistorCalculator\images\new.png"/>
+   </property>
    <property name="text">
     <string>New</string>
    </property>
@@ -212,6 +230,9 @@ QPushButton:pressed {
    </property>
   </action>
   <action name="actionSave">
+   <property name="icon">
+    <iconset theme="d:\MyProject\Python\ResistorCalculator\images\save.png"/>
+   </property>
    <property name="text">
     <string>Save</string>
    </property>
@@ -220,6 +241,9 @@ QPushButton:pressed {
    </property>
   </action>
   <action name="actionOpen">
+   <property name="icon">
+    <iconset theme="d:\MyProject\Python\ResistorCalculator\images\open.png"/>
+   </property>
    <property name="text">
     <string>Open</string>
    </property>
@@ -228,6 +252,9 @@ QPushButton:pressed {
    </property>
   </action>
   <action name="actionExit">
+   <property name="icon">
+    <iconset theme="d:\MyProject\Python\ResistorCalculator\images\exit.png"/>
+   </property>
    <property name="text">
     <string>Exit</string>
    </property>
@@ -236,6 +263,9 @@ QPushButton:pressed {
    </property>
   </action>
   <action name="actionInfo">
+   <property name="icon">
+    <iconset theme="d:\MyProject\Python\ResistorCalculator\images\info.png"/>
+   </property>
    <property name="text">
     <string>Info</string>
    </property>

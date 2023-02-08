@@ -28,17 +28,19 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>30</x>
      <y>20</y>
-     <width>300</width>
-     <height>13</height>
+     <width>311</width>
+     <height>16</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>9</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
+     <family>Rubik Medium</family>
+     <pointsize>11</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
+     <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
@@ -61,30 +63,69 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>45</y>
+     <x>40</x>
+     <y>40</y>
      <width>281</width>
-     <height>16</height>
+     <height>20</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Rubik</family>
+     <pointsize>9</pointsize>
+     <kerning>true</kerning>
+    </font>
    </property>
    <property name="text">
     <string>Copyright © 2022-2022 by Stepan Toshel.</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>29</y>
+     <width>351</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Rubik</family>
+     <pointsize>9</pointsize>
+     <kerning>true</kerning>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>65</y>
+     <x>40</x>
+     <y>60</y>
      <width>281</width>
-     <height>16</height>
+     <height>20</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Rubik</family>
+     <pointsize>9</pointsize>
+     <kerning>true</kerning>
+    </font>
    </property>
    <property name="text">
     <string>Program for calculating the resistance of electrical circuits.</string>
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="images/icon.qrc"/>
+ </resources>
  <connections/>
 </ui>
