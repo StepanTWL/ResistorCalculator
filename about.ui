@@ -6,38 +6,38 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>450</width>
     <height>120</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>400</width>
+    <width>450</width>
     <height>120</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>400</width>
+    <width>450</width>
     <height>120</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>About</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="labelName">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>20</y>
-     <width>311</width>
+     <x>90</x>
+     <y>15</y>
+     <width>331</width>
      <height>16</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Rubik Medium</family>
-     <pointsize>11</pointsize>
+     <pointsize>12</pointsize>
      <weight>50</weight>
      <bold>false</bold>
      <kerning>true</kerning>
@@ -50,20 +50,20 @@
   <widget class="QPushButton" name="ButtonOk">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>90</y>
-     <width>75</width>
-     <height>23</height>
+     <x>185</x>
+     <y>85</y>
+     <width>80</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="text">
     <string>OK</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="labelCopyright">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>90</x>
      <y>40</y>
      <width>281</width>
      <height>20</height>
@@ -72,7 +72,7 @@
    <property name="font">
     <font>
      <family>Rubik</family>
-     <pointsize>9</pointsize>
+     <pointsize>10</pointsize>
      <kerning>true</kerning>
     </font>
    </property>
@@ -80,47 +80,55 @@
     <string>Copyright © 2022-2022 by Stepan Toshel.</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_4">
+  <widget class="QLabel" name="labelDescription">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>29</y>
-     <width>351</width>
-     <height>71</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Rubik</family>
-     <pointsize>9</pointsize>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
+     <x>90</x>
      <y>60</y>
-     <width>281</width>
+     <width>361</width>
      <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Rubik</family>
-     <pointsize>9</pointsize>
+     <pointsize>10</pointsize>
      <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
     <string>Program for calculating the resistance of electrical circuits.</string>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelIcon">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>70</width>
+     <height>70</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>70</width>
+     <height>70</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>70</width>
+     <height>70</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">image: url(:/newPrefix/icon.png);</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

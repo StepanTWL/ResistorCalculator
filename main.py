@@ -1,47 +1,46 @@
 import sys
 from datetime import datetime
-from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QFileDialog
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5 import QtWidgets
+from about import Ui_About
+from window import Ui_ResistorCalculator
 from work_string import parse_string
 
 version = '0.1'
 
 
 def on_click_calculator():
-    s = form.ResistFormula.text()
+    s = ui.ResistFormula.text()
     if not s:
         return
     s = parse_string(s)
     s = float(format(float(s), ".6f"))
     s = '{0:,}'.format(s).replace(',', '.')
     s = s[:s.rfind('.')] + ',' + s[s.rfind('.') + 1:]
-    form.Result.setText(f'Result    {s}R')
+    ui.Result.setText(f'Result    {s}R')
 
 
 def on_click_info():
-    global windowAbout, window, formAbout
-    FormAbout, WindowAbout = uic.loadUiType("about.ui")
-    windowAbout = WindowAbout()
-    formAbout = FormAbout()
-    formAbout.setupUi(windowAbout)
-    width = window.size().width()
-    height = window.size().height()
-    x = window.x() + 300
-    y = window.y() + 100
-    windowAbout.setGeometry(x, y, 200, 120)
-    windowAbout.show()
+    global ui, ui_about, About
+    About = QtWidgets.QDialog()
+    ui_about = Ui_About()
+    ui_about.setupUi(About)
+    About.show()
+    #x = ui.x() + 300
+    #y = ui.y() + 100
+    #ui_about.setGeometry(x, y, 200, 120)
     a = datetime.today().year
-    s = formAbout.label_2.text()
-    formAbout.label_2.setText(s[:17] + str(a) + s[21:])
+    s = ui_about.labelCopyright.text()
+    ui_about.labelCopyright.setText(s[:17] + str(a) + s[21:])
     a = datetime.today().strftime("%d.%m.%Y")
-    s = formAbout.label.text()
-    formAbout.label.setText(f"About Resistor Calculator {version} ({a})")
-    formAbout.ButtonOk.clicked.connect(windowAbout.close)
+    s = ui_about.labelName.text()
+    ui_about.labelName.setText(f"About Resistor Calculator {version} ({a})")
+    ui_about.ButtonOk.clicked.connect(About.close)
 
 
 def on_click_new():
-    form.ResistFormula.setText('')
-    form.Result.setText(f'Result    0,0R')
+    ui.ResistFormula.setText('')
+    ui.Result.setText(f'Result    0,0R')
 
 
 def on_click_save():
@@ -49,9 +48,9 @@ def on_click_save():
 
     if check:
         with open(file, "w") as file:
-            formula = form.ResistFormula.text()
+            formula = ui.ResistFormula.text()
             file.write(f"Formula   {formula}\n")
-            result = form.Result.text()
+            result = ui.Result.text()
             file.write(result)
 
 
@@ -61,27 +60,26 @@ def on_click_open():
     if check:
         with open(file, "r") as file:
             formula = file.readline()
-            form.ResistFormula.setText(formula[10:-1])
+            ui.ResistFormula.setText(formula[10:-1])
             result = file.readline()
-            form.Result.setText(result)
+            ui.Result.setText(result)
 
 
-Form, Window = uic.loadUiType("window.ui")
+app = QtWidgets.QApplication(sys.argv)
+ResistorCalculator = QtWidgets.QMainWindow()
+ui = Ui_ResistorCalculator()
+ui.setupUi(ResistorCalculator)
+ResistorCalculator.show()
 
-app = QApplication([])
-window = Window()
-form = Form()
-form.setupUi(window)
-window.show()
 
-form.ButtonCalculate.clicked.connect(on_click_calculator)
-form.actionNew.triggered.connect(on_click_new)
-form.actionSave.triggered.connect(on_click_save)
-form.actionOpen.triggered.connect(on_click_open)
-form.actionInfo.triggered.connect(on_click_info)
-form.actionExit.triggered.connect(sys.exit)
+ui.ButtonCalculate.clicked.connect(on_click_calculator)
+ui.actionNew.triggered.connect(on_click_new)
+ui.actionSave.triggered.connect(on_click_save)
+ui.actionOpen.triggered.connect(on_click_open)
+ui.actionInfo.triggered.connect(on_click_info)
+ui.actionExit.triggered.connect(sys.exit)
 
-app.exec_()
+sys.exit(app.exec_())
 
 '''
     @pyqtSlot()
