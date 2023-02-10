@@ -14,6 +14,8 @@ class Ui_About(object):
         About.resize(450, 120)
         About.setMinimumSize(QtCore.QSize(450, 120))
         About.setMaximumSize(QtCore.QSize(450, 120))
+        icon = QtGui.QIcon.fromTheme("d:\\MyProject\\Python\\ResistorCalculator\\images\\info.png")
+        About.setWindowIcon(icon)
         self.labelName = QtWidgets.QLabel(About)
         self.labelName.setGeometry(QtCore.QRect(90, 15, 331, 16))
         font = QtGui.QFont()

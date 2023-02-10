@@ -1,12 +1,13 @@
 import sys
 from datetime import datetime
+
 from PyQt5.QtWidgets import QFileDialog
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from about import Ui_About
 from window import Ui_ResistorCalculator
 from work_string import parse_string
 
-version = '0.1'
+version = 'v0.1 from 10.02.2023'
 
 
 def on_click_calculator():
@@ -21,21 +22,19 @@ def on_click_calculator():
 
 
 def on_click_info():
-    global ui, ui_about, About
+    global ResistorCalculator, ui_about, About
     About = QtWidgets.QDialog()
     ui_about = Ui_About()
     ui_about.setupUi(About)
-    About.show()
-    #x = ui.x() + 300
-    #y = ui.y() + 100
-    #ui_about.setGeometry(x, y, 200, 120)
+    About.setWindowFlags(QtCore.Qt.WindowCloseButtonHint)
+    x = ResistorCalculator.x() + (ResistorCalculator.width() - About.width())//2
+    y = ResistorCalculator.y()
+    About.setGeometry(x, y, 200, 120)
     a = datetime.today().year
-    s = ui_about.labelCopyright.text()
-    ui_about.labelCopyright.setText(s[:17] + str(a) + s[21:])
-    a = datetime.today().strftime("%d.%m.%Y")
-    s = ui_about.labelName.text()
-    ui_about.labelName.setText(f"About Resistor Calculator {version} ({a})")
+    ui_about.labelCopyright.setText(f'Copyright © 2022-{a} by Stepan Toshel.')
+    ui_about.labelName.setText(f"About Resistor Calculator {version[1:4]} ({version[10:]})")
     ui_about.ButtonOk.clicked.connect(About.close)
+    About.show()
 
 
 def on_click_new():
@@ -69,6 +68,7 @@ app = QtWidgets.QApplication(sys.argv)
 ResistorCalculator = QtWidgets.QMainWindow()
 ui = Ui_ResistorCalculator()
 ui.setupUi(ResistorCalculator)
+ResistorCalculator.setWindowFlags(QtCore.Qt.CustomizeWindowHint | QtCore.Qt.WindowCloseButtonHint | QtCore.Qt.WindowMinimizeButtonHint)
 ResistorCalculator.show()
 
 

@@ -25,6 +25,9 @@
   <property name="windowTitle">
    <string>About</string>
   </property>
+  <property name="windowIcon">
+   <iconset theme="d:\MyProject\Python\ResistorCalculator\images\info.png"/>
+  </property>
   <widget class="QLabel" name="labelName">
    <property name="geometry">
     <rect>
