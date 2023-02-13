@@ -46,7 +46,7 @@
     <property name="geometry">
      <rect>
       <x>-1</x>
-      <y>100</y>
+      <y>110</y>
       <width>801</width>
       <height>51</height>
      </rect>
@@ -166,7 +166,7 @@ QPushButton:pressed {
      <rect>
       <x>70</x>
       <y>52</y>
-      <width>180</width>
+      <width>191</width>
       <height>16</height>
      </rect>
     </property>
@@ -185,7 +185,7 @@ QPushButton:pressed {
      <rect>
       <x>70</x>
       <y>20</y>
-      <width>660</width>
+      <width>641</width>
       <height>30</height>
      </rect>
     </property>
@@ -194,6 +194,57 @@ QPushButton:pressed {
       <family>Rubik</family>
       <pointsize>10</pointsize>
      </font>
+    </property>
+    <property name="inputMask">
+     <string/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButtonResistor">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>7</y>
+      <width>71</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Resistor</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButtonCapacity">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>27</y>
+      <width>71</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Capacity</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButtonRC">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>47</y>
+      <width>71</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>RC-circuit</string>
     </property>
    </widget>
   </widget>

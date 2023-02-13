@@ -14,11 +14,18 @@ def on_click_calculator():
     s = ui.ResistFormula.text()
     if not s:
         return
-    s = parse_string(s)
-    s = float(format(float(s), ".6f"))
-    s = '{0:,}'.format(s).replace(',', '.')
-    s = s[:s.rfind('.')] + ',' + s[s.rfind('.') + 1:]
-    ui.Result.setText(f'Result    {s}R')
+    if ui.radioButtonResistor.isChecked():
+        s = parse_string(s, 'resistor')
+        s = float(format(float(s), ".6f"))
+        s = '{0:,}'.format(s).replace(',', '.')
+        s = s[:s.rfind('.')] + ',' + s[s.rfind('.') + 1:]
+        ui.Result.setText(f'Result    {s}R')
+    elif ui.radioButtonCapacity.isChecked():
+        s = parse_string(s, 'capacity')
+        s = float(s)*1000000
+        s = '{0:.7f}'.format(s).replace(',', '.')
+        s = s[:s.rfind('.')] + ',' + s[s.rfind('.') + 1:]
+        ui.Result.setText(f'Result    {s}μF')
 
 
 def on_click_info():
@@ -40,6 +47,7 @@ def on_click_info():
 def on_click_new():
     ui.ResistFormula.setText('')
     ui.Result.setText(f'Result    0,0R')
+    ui.radioButtonResistor.setChecked(True)
 
 
 def on_click_save():
@@ -64,6 +72,22 @@ def on_click_open():
             ui.Result.setText(result)
 
 
+def on_click_resistor():
+    ui.label.setText("Example: 10k | (10k + 10M)")
+    ui.Result.setText("Result    0,0R")
+    ui.ResistFormula.setText('')
+
+def on_click_capacity():
+    ui.label.setText("Example: 10m | (10mk + 10N + 20п)")
+    ui.Result.setText("Result    0,0μF")
+    ui.ResistFormula.setText('')
+
+def on_click_rc():
+    ui.label.setText("Example: 10k | (10k + 10M)")#tmp
+    ui.Result.setText("Result    0,0R")
+    ui.ResistFormula.setText('')
+
+
 app = QtWidgets.QApplication(sys.argv)
 ResistorCalculator = QtWidgets.QMainWindow()
 ui = Ui_ResistorCalculator()
@@ -79,18 +103,8 @@ ui.actionOpen.triggered.connect(on_click_open)
 ui.actionInfo.triggered.connect(on_click_info)
 ui.actionExit.triggered.connect(sys.exit)
 
+ui.radioButtonResistor.toggled.connect(on_click_resistor)
+ui.radioButtonCapacity.toggled.connect(on_click_capacity)
+ui.radioButtonRC.toggled.connect(on_click_rc)
+
 sys.exit(app.exec_())
-
-'''
-    @pyqtSlot()
-    def on_pushButtonPrint_clicked(self):
-
-        cmd = 'python _QPushButton-SignalsExample.py'                       # python
-        output = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)  # 
-
-        exePath = "C:/Windows/system32/calc.exe"                            # .exe
-        subprocess.Popen(exePath)                                           #
-
-        self.close()                                                        # <<<===                                   
-
-'''
