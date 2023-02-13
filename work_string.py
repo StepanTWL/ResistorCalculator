@@ -19,13 +19,13 @@ def math_string(s: str) -> str:
             term1 = float(s[index_start:index])
             term2 = float(s[index + 1:index_stop])
             if i == '+':
-                result = format(term1 + term2, '.12f')
+                result = format(term1 + term2, '.13f')
             elif i == '|':
-                result = format(term1 * term2 / (term1 + term2), '.12f')
+                result = format(term1 * term2 / (term1 + term2), '.13f')
             elif i == '*':
-                result = format(term1 * term2, '.12f')
-            if '.00000000000' in result:
-                result = result[:-13]
+                result = format(term1 * term2, '.13f')
+            if '.00000000000000' in result:
+                result = result[:-15]
             s = s[:index_start] + result + s[index_stop:]
     return s
 
