@@ -17,10 +17,10 @@ class Ui_About(object):
         icon = QtGui.QIcon.fromTheme("d:\\MyProject\\Python\\ResistorCalculator\\images\\info.png")
         About.setWindowIcon(icon)
         self.labelName = QtWidgets.QLabel(About)
-        self.labelName.setGeometry(QtCore.QRect(90, 15, 331, 16))
+        self.labelName.setGeometry(QtCore.QRect(90, 15, 341, 16))
         font = QtGui.QFont()
         font.setFamily("Rubik Medium")
-        font.setPointSize(12)
+        font.setPointSize(11)
         font.setBold(False)
         font.setWeight(50)
         font.setKerning(True)
@@ -60,7 +60,7 @@ class Ui_About(object):
     def retranslateUi(self, About):
         _translate = QtCore.QCoreApplication.translate
         About.setWindowTitle(_translate("About", "About"))
-        self.labelName.setText(_translate("About", "About Resistor Calculator 0.1 (02.02.2023)"))
+        self.labelName.setText(_translate("About", "About Resistor Calculator 0.0 (01.01.1970)"))
         self.ButtonOk.setText(_translate("About", "OK"))
         self.labelCopyright.setText(_translate("About", "Copyright © 2022-2022 by Stepan Toshel."))
         self.labelDescription.setText(_translate("About", "Program for calculating the resistance of electrical circuits."))

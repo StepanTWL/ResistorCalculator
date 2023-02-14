@@ -26,28 +26,29 @@
    <string>About</string>
   </property>
   <property name="windowIcon">
-   <iconset theme="d:\MyProject\Python\ResistorCalculator\images\info.png"/>
+   <iconset theme="d:\MyProject\Python\ResistorCalculator\images\info.png">
+    <normaloff>.</normaloff>.</iconset>
   </property>
   <widget class="QLabel" name="labelName">
    <property name="geometry">
     <rect>
      <x>90</x>
      <y>15</y>
-     <width>331</width>
+     <width>341</width>
      <height>16</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Rubik Medium</family>
-     <pointsize>12</pointsize>
+     <pointsize>11</pointsize>
      <weight>50</weight>
      <bold>false</bold>
      <kerning>true</kerning>
     </font>
    </property>
    <property name="text">
-    <string>About Resistor Calculator 0.1 (02.02.2023)</string>
+    <string>About Resistor Calculator 0.0 (01.01.1970)</string>
    </property>
   </widget>
   <widget class="QPushButton" name="ButtonOk">
