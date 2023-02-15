@@ -29,6 +29,27 @@ def math_string(s: str) -> str:
             s = s[:index_start] + result + s[index_stop:]
     return s
 
+
+def math_string_rc(s: str) -> str:
+    while True:
+        if '*' not in s:
+            break
+        index = s.find('*')
+        index_start = max(s.rfind('+', index), 0) + 1
+        index_stop = s.find('+', index)
+        term1 = float(s[index_start:index])
+        term2 = float(s[index + 1:index_stop])
+        result = format(term1 * term2, '.13f')
+        if '.00000000000000' in result:
+            result = result[:-15]
+        s = s[:index_start] + result + s[index_stop:]
+    return s
+
+
+def rise_voltage(s: str) -> str:
+
+
+
 def clear_string_resistor(s: str) -> str:
     s1 = ''
     for i in s.lower():
@@ -64,7 +85,7 @@ def clear_string_capacity(s: str) -> str:
             s1 += '.'
         elif s[i] in '0123456789+|)(.*':
             s1 += s[i]
-        if (s[i] == 'm' or s[i] == 'м') and i != (len(s)-1) and (s[i+1] == 'k' or s[i+1] == 'к'):
+        if (s[i] == 'm' or s[i] == 'м') and i != (len(s) - 1) and (s[i + 1] == 'k' or s[i + 1] == 'к'):
             s1 += '*0.000001'
         elif s[i] == 'm' or s[i] == 'м':
             s1 += '*0.001'
@@ -73,6 +94,37 @@ def clear_string_capacity(s: str) -> str:
         elif s[i] == 'p' or s[i] == 'п':
             s1 += '*0.000000000001'
     s1 = s1.lstrip('*').replace('**', '*')
+    s = copy(s1)
+    s1 = s[0]
+    for i in range(1, len(s)):
+        if s[i - 1] == ('+' or '|') and s[i] == '*':
+            continue
+        s1 += s[i]
+    return s1
+
+
+def clear_string_rc(s: str) -> str:
+    s1 = ''
+    s = s.lower()
+    for i in range(len(s)):
+        if s[i] == ',':
+            s1 += '.'
+        elif s[i] in '0123456789+./v%':
+            s1 += s[i]
+        elif s[i] == 'k' and s.find('+', 0, i) == -1:
+            s1 += '*1000'
+        elif s[i] == 'm' and s.find('+', 0, i) == -1:
+            s1 += '*1000000'
+        elif s[i] == 'g':
+            s1 += '*1000000000'
+        elif s[i] == 'm' and s[i + 1] == 'k':
+            s1 += '*0.000001'
+        elif s[i] == 'm':
+            s1 += '*0.001'
+        elif s[i] == 'n':
+            s1 += '*0.000000001'
+        elif s[i] == 'p':
+            s1 += '*0.000000000001'
     s = copy(s1)
     s1 = s[0]
     for i in range(1, len(s)):
@@ -101,7 +153,12 @@ def brackets_string(s: str) -> str:
 
 
 def parse_string(s: str, status: str):
-    if status == 'resistor':
+    if status == 'rc':
+        s = clear_string_rc(s)
+        s = math_string(s)
+        s = rise_voltage(s)
+        return s
+    elif status == 'resistor':
         s = clear_string_resistor(s)
     elif status == 'capacity':
         s = clear_string_capacity(s)

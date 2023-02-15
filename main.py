@@ -67,6 +67,8 @@ def on_click_calculator():
         s = parse_string(s, 'resistor')
     elif ui.radioButtonCapacity.isChecked():
         s = parse_string(s, 'capacity')
+    elif ui.radioButtonRC.isChecked():
+        s = parse_string(s, 'rc')
     s = float(s) * select_symbol('value')
     s = '{0:.7f}'.format(s).replace('.', ',')
     s = "{:,}".format(int(s[:s.rfind(',')])).replace(',', '.') + s[s.rfind(','):].rstrip(',0')
