@@ -164,6 +164,7 @@ class Ui_ResistorCalculator(object):
         self.menuFile.addAction(self.actionNew)
         self.menuFile.addAction(self.actionSave)
         self.menuFile.addAction(self.actionOpen)
+        self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionExit)
         self.menuHelp.addAction(self.actionInfo)
         self.menubar.addAction(self.menuFile.menuAction())
