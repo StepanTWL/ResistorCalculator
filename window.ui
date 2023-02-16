@@ -46,20 +46,20 @@
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>89</y>
-      <width>360</width>
+      <y>96</y>
+      <width>640</width>
       <height>20</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
-      <width>360</width>
+      <width>640</width>
       <height>20</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>360</width>
+      <width>640</width>
       <height>20</height>
      </size>
     </property>
@@ -80,33 +80,11 @@
      <string>Result    0Ω</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>50</y>
-      <width>251</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Rubik</family>
-      <kerning>true</kerning>
-     </font>
-    </property>
-    <property name="text">
-     <string>Example: 10k | (10k + 10M)</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="ResistFormula">
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>20</y>
+      <y>26</y>
       <width>641</width>
       <height>31</height>
      </rect>
@@ -128,7 +106,7 @@
     <property name="geometry">
      <rect>
       <x>300</x>
-      <y>120</y>
+      <y>127</y>
       <width>200</width>
       <height>30</height>
      </rect>
@@ -173,13 +151,13 @@ QPushButton:pressed {
      <string>Calculate</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>720</x>
       <y>8</y>
       <width>120</width>
-      <height>51</height>
+      <height>71</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0">
@@ -224,13 +202,13 @@ QPushButton:pressed {
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>54</y>
-      <width>201</width>
-      <height>21</height>
+      <y>60</y>
+      <width>261</width>
+      <height>26</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">

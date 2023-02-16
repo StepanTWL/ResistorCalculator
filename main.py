@@ -1,59 +1,80 @@
 import sys
 from datetime import datetime
+from decimal import Decimal
 from typing import Union
 
-from PyQt5.QtWidgets import QFileDialog
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets, QtCore, QtGui
 from about import Ui_About
 from window import Ui_ResistorCalculator
 from work_string import parse_string
 
-version = '0.1.5 14.02.2023'
+version = '0.2 16.02.2023'
 
 
 def select_symbol(type: str) -> Union[float, str]:
-    if ui.radioButtonResistor.isChecked() or ui.radioButtonRC.isChecked():
+    if ui.radioButtonResistor.isChecked():
         if ui.radioButtonSymbol1.isChecked():  # may be switch if it can?
             if type == 'value':
-                return 1.0
+                return Decimal('1.0')
             elif type == 'symbol':
                 return 'Ω'
         elif ui.radioButtonSymbol2.isChecked():
             if type == 'value':
-                return 0.001
+                return Decimal('0.001')
             elif type == 'symbol':
                 return 'kΩ'
         elif ui.radioButtonSymbol3.isChecked():
             if type == 'value':
-                return 0.000001
+                return Decimal('0.000001')
             elif type == 'symbol':
                 return 'MΩ'
         elif ui.radioButtonSymbol4.isChecked():
             if type == 'value':
-                return 0.000000001
+                return Decimal('0.000000001')
             elif type == 'symbol':
                 return 'GΩ'
     elif ui.radioButtonCapacity.isChecked():
         if ui.radioButtonSymbol1.isChecked():
             if type == 'value':
-                return 1000.0
+                return Decimal('1000.0')
             elif type == 'symbol':
                 return 'mF'
         elif ui.radioButtonSymbol2.isChecked():
             if type == 'value':
-                return 1000000.0
+                return Decimal('1000000.0')
             elif type == 'symbol':
                 return 'μF'
         elif ui.radioButtonSymbol3.isChecked():
             if type == 'value':
-                return 1000000000.0
+                return Decimal('1000000000.0')
             elif type == 'symbol':
                 return 'nF'
         elif ui.radioButtonSymbol4.isChecked():
             if type == 'value':
-                return 1000000000000.0
+                return Decimal('1000000000000.0')
             elif type == 'symbol':
                 return 'pF'
+    elif ui.radioButtonRC.isChecked():
+        if ui.radioButtonSymbol1.isChecked():
+            if type == 'value':
+                return Decimal('1.0')
+            elif type == 'symbol':
+                return 's'
+        elif ui.radioButtonSymbol2.isChecked():
+            if type == 'value':
+                return Decimal('1000.0')
+            elif type == 'symbol':
+                return 'ms'
+        elif ui.radioButtonSymbol3.isChecked():
+            if type == 'value':
+                return Decimal('1000000.0')
+            elif type == 'symbol':
+                return 'μs'
+        elif ui.radioButtonSymbol4.isChecked():
+            if type == 'value':
+                return Decimal('1000000000.0')
+            elif type == 'symbol':
+                return 'ns'
 
 
 def on_click_calculator():
@@ -69,7 +90,7 @@ def on_click_calculator():
         s = parse_string(s, 'capacity')
     elif ui.radioButtonRC.isChecked():
         s = parse_string(s, 'rc')
-    s = float(s) * select_symbol('value')
+    s = Decimal(s) * select_symbol('value')
     s = '{0:.7f}'.format(s).replace('.', ',')
     s = "{:,}".format(int(s[:s.rfind(',')])).replace(',', '.') + s[s.rfind(','):].rstrip(',0')
     if s:
@@ -102,10 +123,12 @@ def on_click_new():
 
 
 def on_click_save():
-    file, check = QFileDialog.getSaveFileName(None, 'Save file', 'c:\\', "Text Files (*.txt);;All Files (*)")
+    file, check = QtWidgets.QFileDialog.getSaveFileName(None, 'Save file', 'c:\\', "Text Files (*.txt);;All Files (*)")
 
     if check:
         with open(file, "w") as file:
+            file.write(f"Type   {}\n")
+            file.write(f"Prefix   {}\n")
             formula = ui.ResistFormula.text()
             file.write(f"Formula   {formula}\n")
             result = ui.Result.text()
@@ -113,7 +136,7 @@ def on_click_save():
 
 
 def on_click_open():
-    file, check = QFileDialog.getOpenFileName(None, 'Open file', 'c:\\', "Text Files (*.txt);;All Files (*)")
+    file, check = QtWidgets.QFileDialog.getOpenFileName(None, 'Open file', 'c:\\', "Text Files (*.txt);;All Files (*)")
 
     if check:
         with open(file, "r") as file:
@@ -124,7 +147,7 @@ def on_click_open():
 
 
 def on_click_resistor():
-    ui.label.setText("Example: 10k | (10k + 10M)")
+    ui.ResistFormula.setPlaceholderText("Example: 10.5k|(10k+10m)|(5g+1000)")
     ui.Result.setText("Result    0Ω")
     ui.ResistFormula.setText('')
     ui.radioButtonSymbol1.setChecked(True)
@@ -132,10 +155,14 @@ def on_click_resistor():
     ui.radioButtonSymbol2.setText("kΩ")
     ui.radioButtonSymbol3.setText("MΩ")
     ui.radioButtonSymbol4.setText("GΩ")
+    reg = QtCore.QRegExp("[kmgKMG0-9+|*().,]{100}")
+    pValidator = QtGui.QRegExpValidator()
+    pValidator.setRegExp(reg)
+    ui.ResistFormula.setValidator(pValidator)
 
 
 def on_click_capacity():
-    ui.label.setText("Example: 10m | (10mk + 10N + 20п)")
+    ui.ResistFormula.setPlaceholderText("Example: 10.5m|(10mk+10n+20p)|(1mk+1000p)")
     ui.Result.setText("Result    0μF")
     ui.ResistFormula.setText('')
     ui.radioButtonSymbol2.setChecked(True)
@@ -143,10 +170,14 @@ def on_click_capacity():
     ui.radioButtonSymbol2.setText("μF")
     ui.radioButtonSymbol3.setText("nF")
     ui.radioButtonSymbol4.setText("pF")
+    reg = QtCore.QRegExp("[kmnpKMNP0-9+|*().,]{100}")
+    pValidator = QtGui.QRegExpValidator()
+    pValidator.setRegExp(reg)
+    ui.ResistFormula.setValidator(pValidator)
 
 
 def on_click_rc():
-    ui.label.setText("Example: 10k + 10mk + 2.7V/3.3V (or 82%)")  # tmp
+    ui.ResistFormula.setPlaceholderText("Example: 10.5k+10mk+2.7V/3.3V(82%)")
     ui.Result.setText("Result    0s")
     ui.ResistFormula.setText('')
     ui.radioButtonSymbol1.setChecked(True)
@@ -154,6 +185,10 @@ def on_click_rc():
     ui.radioButtonSymbol2.setText("ms")
     ui.radioButtonSymbol3.setText("mks")
     ui.radioButtonSymbol4.setText("ns")
+    reg = QtCore.QRegExp("[kmnpgvKMNPGV0-9+.,%/]{100}")
+    pValidator = QtGui.QRegExpValidator()
+    pValidator.setRegExp(reg)
+    ui.ResistFormula.setValidator(pValidator)
 
 
 app = QtWidgets.QApplication(sys.argv)
@@ -174,5 +209,12 @@ ui.actionExit.triggered.connect(sys.exit)
 ui.radioButtonResistor.toggled.connect(on_click_resistor)
 ui.radioButtonCapacity.toggled.connect(on_click_capacity)
 ui.radioButtonRC.toggled.connect(on_click_rc)
+
+#reg = QtCore.QRegExp("[kmnpgvKMNPGV0-9+|*().,%/]{100}")
+reg = QtCore.QRegExp("[kmgKMG0-9+|*().,]{100}")
+pValidator = QtGui.QRegExpValidator()
+pValidator.setRegExp(reg)
+ui.ResistFormula.setValidator(pValidator)
+ui.ResistFormula.setPlaceholderText("Example: 10.5k|(10k+10m)|(5g+1000)")
 
 sys.exit(app.exec_())

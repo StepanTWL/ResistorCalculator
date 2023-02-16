@@ -1,4 +1,5 @@
 from copy import copy
+from decimal import Decimal
 
 
 def math_string(s: str) -> str:
@@ -16,16 +17,14 @@ def math_string(s: str) -> str:
                 index_stop = s.find(arr[1], index + 1, len(s))
             if arr[2] in s[index + 1:] and s.find(arr[2], index + 1, len(s)) < index_stop:
                 index_stop = s.find(arr[2], index + 1, len(s))
-            term1 = float(s[index_start:index])
-            term2 = float(s[index + 1:index_stop])
+            term1 = Decimal(s[index_start:index])
+            term2 = Decimal(s[index + 1:index_stop])
             if i == '+':
                 result = format(term1 + term2, '.13f')
             elif i == '|':
                 result = format(term1 * term2 / (term1 + term2), '.13f')
             elif i == '*':
                 result = format(term1 * term2, '.13f')
-            if '.00000000000000' in result:
-                result = result[:-15]
             s = s[:index_start] + result + s[index_stop:]
     return s
 
@@ -35,19 +34,38 @@ def math_string_rc(s: str) -> str:
         if '*' not in s:
             break
         index = s.find('*')
-        index_start = max(s.rfind('+', index), 0) + 1
+        index_start = s.rfind('+', 0, index) + 1
         index_stop = s.find('+', index)
-        term1 = float(s[index_start:index])
-        term2 = float(s[index + 1:index_stop])
+        term1 = Decimal(s[index_start:index])
+        term2 = Decimal(s[index + 1:index_stop])
         result = format(term1 * term2, '.13f')
-        if '.00000000000000' in result:
-            result = result[:-15]
         s = s[:index_start] + result + s[index_stop:]
     return s
 
 
-def rise_voltage(s: str) -> str:
+def level_string_rc(s: str) -> str:
+    index = s.rfind('+') + 1
+    if '%' in s:
+        result = format(Decimal(s[index:-1])/Decimal('100.0'), '.13f')
+    elif 'v' in s:
+        index_start = s.find('v')
+        term1 = Decimal(s[index:index_start])
+        term2 = Decimal(s[index_start+2:-1])
+        result = format(term1 / term2, '.13f')
+    s = s[:index] + result
+    return s
 
+
+def time_string_rc(s: str) -> str:
+    index1 = s.find('+')
+    index2 = s.rfind('+')
+    term1 = Decimal(s[:index1])
+    term2 = Decimal(s[index1+1:index2])
+    term3 = Decimal(s[index2+1:])
+    result = format(-(Decimal('1.0')-term3).ln()*term1*term2, '.13f')
+    if '.00000000000000' in result:
+        result = result[:-15]
+    return result
 
 
 def clear_string_resistor(s: str) -> str:
@@ -109,7 +127,7 @@ def clear_string_rc(s: str) -> str:
     for i in range(len(s)):
         if s[i] == ',':
             s1 += '.'
-        elif s[i] in '0123456789+./v%':
+        elif s[i] in '0123456789+./v%*':
             s1 += s[i]
         elif s[i] == 'k' and s.find('+', 0, i) == -1:
             s1 += '*1000'
@@ -155,8 +173,9 @@ def brackets_string(s: str) -> str:
 def parse_string(s: str, status: str):
     if status == 'rc':
         s = clear_string_rc(s)
-        s = math_string(s)
-        s = rise_voltage(s)
+        s = math_string_rc(s)
+        s = level_string_rc(s)
+        s = time_string_rc(s)
         return s
     elif status == 'resistor':
         s = clear_string_resistor(s)
