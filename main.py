@@ -127,8 +127,8 @@ def on_click_save():
 
     if check:
         with open(file, "w") as file:
-            file.write(f"Type   {}\n")
-            file.write(f"Prefix   {}\n")
+            #file.write(f"Type   {}\n")
+            #file.write(f"Prefix   {}\n")
             formula = ui.ResistFormula.text()
             file.write(f"Formula   {formula}\n")
             result = ui.Result.text()
