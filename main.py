@@ -1,3 +1,9 @@
+"""
+TODO:
+1 Save file *.txt, *.json.
+2 Save broke.
+"""
+
 import sys
 from datetime import datetime
 from decimal import Decimal
