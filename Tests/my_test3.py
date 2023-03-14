@@ -3,7 +3,7 @@ import serial
 
 ser = serial.Serial(
     # Serial Port to read the data from
-    port='COM56',
+    port='COM6',
 
     # Rate at which the information is shared to the communication channel
     baudrate=230400,
@@ -24,19 +24,23 @@ ser = serial.Serial(
 packet = bytearray()
 packet.append(0x0c)
 packet.append(0x00)
+packet.append(0x01)
 packet.append(0x00)
 packet.append(0x00)
 packet.append(0x00)
 packet.append(0x00)
 packet.append(0x00)
-packet.append(0x00)
-packet.append(0xd9)
-packet.append(0x35)
-packet.append(0x72)
-packet.append(0xcd)
+packet.append(0x7c)
+packet.append(0xe6)
+packet.append(0x2e)
+packet.append(0x06)
+packet_rx = [0]*100
 #ser.open()
 # Mentions the Current Counter number for each line written
 # Pauses for one second each iteration to avoid overworking the port
 while 1:
     ser.write(packet)
+    time.sleep(5)
+    ser.read(packet_rx)
+    print(packet_rx)
     time.sleep(5)
