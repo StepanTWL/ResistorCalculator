@@ -1,14 +1,12 @@
-from PyQt5 import QtWidgets, uic
-from PyQt5.QtSerialPort import QSerialPort
-
-app = QtWidgets.QApplication([])
-win = uic.loadUi('test.ui')
-
-serial = QSerialPort()
-serial.setBaudRate(230400)
-
-def Begin():
-    nameBt = win.ComBt.text()
-    if nameBt == 'SEARCH':
-        port
+from threading import Thread
+from time import sleep
+def func():
+    while True:
+        print(f"from child thread: 0")
+        sleep(0.5)
+th = Thread(target=func)
+th.start()
+while True:
+    print(f"from main thread: 0")
+    sleep(1)
 
