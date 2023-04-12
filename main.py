@@ -7,6 +7,7 @@ TODO:
 import sys
 from datetime import datetime
 from decimal import Decimal
+from time import sleep
 from typing import Union
 
 from PyQt5 import QtWidgets, QtCore, QtGui
@@ -133,12 +134,17 @@ def on_click_save():
 
     if check:
         with open(file, "w") as file:
-            #file.write(f"Type   {}\n")
-            #file.write(f"Prefix   {}\n")
             formula = ui.ResistFormula.text()
             file.write(f"Formula   {formula}\n")
             result = ui.Result.text()
-            file.write(result)
+            file.write(result+"\n")
+            if ui.radioButtonResistor.isChecked():
+                file.write("Type      R\n")
+            elif ui.radioButtonCapacity.isChecked():
+                file.write("Type      C\n")
+            elif ui.radioButtonRC.isChecked():
+                file.write("Type      RC\n")
+
 
 
 def on_click_open():
@@ -147,10 +153,26 @@ def on_click_open():
     if check:
         with open(file, "r") as file:
             formula = file.readline()
-            ui.ResistFormula.setText(formula[10:-1])
             result = file.readline()
+            type = file.readline()
+            sleep(1)
+            if 'RC' in type:
+                ui.radioButtonRC.setChecked(True)
+            elif 'R' in type:
+                ui.radioButtonCapacity.setChecked(True)
+            elif 'C' in type:
+                ui.radioButtonResistor.setChecked(True)
+            ui.ResistFormula.setText(formula[10:-1])
             ui.Result.setText(result)
-
+            sleep(1)
+            if 'ms' in result:
+                ui.radioButtonSymbol2.setChecked(True)
+            elif 'mks' in type:
+                ui.radioButtonSymbol3.setChecked(True)
+            elif 'ns' in type:
+                ui.radioButtonSymbol4.setChecked(True)
+            elif 's' in type:
+                ui.radioButtonSymbol1.setChecked(True)
 
 def on_click_resistor():
     ui.ResistFormula.setPlaceholderText("Example: 10.5k|(10k+10m)|(5g+1000)")

@@ -35,7 +35,10 @@ def math_string_rc(s: str) -> str:
             break
         index = s.find('*')
         index_start = s.rfind('+', 0, index) + 1
-        index_stop = s.find('+', index)
+        if s.find('+', index) == -1:
+            index_stop = len(s)
+        else:
+            index_stop = s.find('+', index)
         term1 = Decimal(s[index_start:index])
         term2 = Decimal(s[index + 1:index_stop])
         result = format(term1 * term2, '.13f')
@@ -46,12 +49,16 @@ def math_string_rc(s: str) -> str:
 def level_string_rc(s: str) -> str:
     index = s.rfind('+') + 1
     if '%' in s:
-        result = format(Decimal(s[index:-1])/Decimal('100.0'), '.13f')
+        result = format(Decimal(s[index:-1]) / Decimal('100.0'), '.13f')
     elif 'v' in s:
         index_start = s.find('v')
         term1 = Decimal(s[index:index_start])
-        term2 = Decimal(s[index_start+2:-1])
+        term2 = Decimal(s[index_start + 2:-1])
         result = format(term1 / term2, '.13f')
+    else:
+        result = format(Decimal('0.6321205588286'))
+        s += '+'+result
+        return s
     s = s[:index] + result
     return s
 
@@ -59,10 +66,12 @@ def level_string_rc(s: str) -> str:
 def time_string_rc(s: str) -> str:
     index1 = s.find('+')
     index2 = s.rfind('+')
+    if index1 == index2:
+        index2 = len(s)
     term1 = Decimal(s[:index1])
-    term2 = Decimal(s[index1+1:index2])
-    term3 = Decimal(s[index2+1:])
-    result = format(-(Decimal('1.0')-term3).ln()*term1*term2, '.13f')
+    term2 = Decimal(s[index1 + 1:index2])
+    term3 = Decimal(s[index2 + 1:])
+    result = format(-(Decimal('1.0') - term3).ln() * term1 * term2, '.13f')
     if '.00000000000000' in result:
         result = result[:-15]
     return result
