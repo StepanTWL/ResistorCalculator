@@ -15,7 +15,7 @@ from about import Ui_About
 from window import Ui_ResistorCalculator
 from work_string import parse_string
 
-version = '0.2 16.02.2023'
+version = '0.2.1 13.04.2023'
 
 
 def select_symbol(type: str) -> Union[float, str]:
