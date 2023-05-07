@@ -1,9 +1,9 @@
 """
 TODO:
-1 Save file *.txt, *.json.
+1 Save file *.json.
 2 Save broke.
 """
-
+import os
 import sys
 from datetime import datetime
 from decimal import Decimal
@@ -116,7 +116,7 @@ def on_click_info():
     y = ResistorCalculator.y()
     About.setGeometry(x, y, 200, 120)
     a = datetime.today().year
-    ui_about.labelCopyright.setText(f'Copyright © 2022-{a} by Stepan Toshel.')
+    ui_about.labelCopyright.setText(f'Copyright © 2022-{a} by Stepan D.')
     ui_about.labelName.setText(f"About Resistor Calculator {version.split()[0]} ({version.split()[1]})")
     ui_about.ButtonOk.clicked.connect(About.close)
     About.show()
@@ -130,20 +130,23 @@ def on_click_new():
 
 
 def on_click_save():
-    file, check = QtWidgets.QFileDialog.getSaveFileName(None, 'Save file', 'c:\\', "Text Files (*.txt);;All Files (*)")
+    file, check = QtWidgets.QFileDialog.getSaveFileName(None, 'Save file', 'c:\\', "Text Files (*.txt);;JSON Files (*.json);;All Files (*)")
+    #file_extension = os.path.splitext(file)[1]
 
     if check:
         with open(file, "w") as file:
-            formula = ui.ResistFormula.text()
-            file.write(f"Formula   {formula}\n")
-            result = ui.Result.text()
-            file.write(result+"\n")
-            if ui.radioButtonResistor.isChecked():
-                file.write("Type      R\n")
-            elif ui.radioButtonCapacity.isChecked():
-                file.write("Type      C\n")
-            elif ui.radioButtonRC.isChecked():
-                file.write("Type      RC\n")
+            file_extension = os.path.splitext(file)[1]
+            if file_extension == '.txt':
+                formula = ui.ResistFormula.text()
+                file.write(f"Formula   {formula}\n")
+                result = ui.Result.text()
+                file.write(result+"\n")
+                if ui.radioButtonResistor.isChecked():
+                    file.write("Type      R\n")
+                elif ui.radioButtonCapacity.isChecked():
+                    file.write("Type      C\n")
+                elif ui.radioButtonRC.isChecked():
+                    file.write("Type      RC\n")
 
 
 

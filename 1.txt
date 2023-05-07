@@ -1,0 +1,3 @@
+Formula   k+k
+Result    2kΩ
+Type      R
